@@ -1,15 +1,18 @@
 import * as THREE from 'three'
-export const  terrainShader: THREE.ShaderMaterialParameters = {
-    uniforms: {
-      color1: {
-      value: new THREE.Color(0xffe600)
-     },
-      color2: {
-      value: new THREE.Color(0xff7b2e)
-     }
+import { lightPalette } from './theme'
 
+
+export const terrainShader: THREE.ShaderMaterialParameters = {
+  uniforms: {
+    color1: {
+      value: lightPalette.landColor1
     },
-    vertexShader:`
+    color2: {
+      value: lightPalette.landColor2
+    }
+
+  },
+  vertexShader: `
     varying vec2 vUv;
 
     void main() {
@@ -17,7 +20,7 @@ export const  terrainShader: THREE.ShaderMaterialParameters = {
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
     }
   `,
-  fragmentShader:`
+  fragmentShader: `
       uniform vec3 color1;
       uniform vec3 color2;
       varying vec2 vUv;
@@ -26,5 +29,6 @@ export const  terrainShader: THREE.ShaderMaterialParameters = {
 
         gl_FragColor = vec4(mix(color1, color2, vUv.y), 1.0);
       }
-  ` 
-  }
+  `
+}
+

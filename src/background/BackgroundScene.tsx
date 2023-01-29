@@ -1,9 +1,8 @@
 import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { terrainShader } from './shaders';
-import { useTheme } from './theme';
-
+import { useTheme } from '../theme';
 function BackgroundScene() {
 
 
@@ -12,6 +11,7 @@ function BackgroundScene() {
     <spotLight position={[100, 1000, 10000]} angle={0.15} penumbra={1} />
     <pointLight position={[-10, -10, -10]} />
     <Camera />
+    <SuspendedParticles/>
     <Landscape />
   </Canvas>
 }
@@ -26,6 +26,34 @@ function generateTerrain() {
 }
 generateTerrain()
 
+function generateVertices(){
+  const vertices = []
+  for ( let i = 0; i < 5000; i ++ ) {
+
+    const x = THREE.MathUtils.randFloatSpread( 1500 );
+    const y = THREE.MathUtils.randFloatSpread( 1500 );
+    const z = THREE.MathUtils.randFloatSpread( 1500 );
+
+    vertices.push( x, y, z );
+
+  }
+  return vertices
+}
+const vertices = generateVertices()
+
+
+function SuspendedParticles() {
+
+  const { palette } = useTheme()
+
+  return  <points>
+      <bufferGeometry attributes={{
+        position: new THREE.Float32BufferAttribute(vertices,3)
+      }}/>
+      <pointsMaterial color={palette.landBorderColor}/>
+    </points>
+}
+
 function Landscape(props: JSX.IntrinsicElements['mesh']) {
   const ref = useRef<THREE.Mesh>(null!)
 
@@ -34,10 +62,10 @@ function Landscape(props: JSX.IntrinsicElements['mesh']) {
   const shaderMaterial = useMemo(() => new THREE.ShaderMaterial(terrainShader), []);
 
   useEffect(() => {
-    shaderMaterial.uniforms['color1'].value = palette.landColor1
-    shaderMaterial.uniforms['color2'].value = palette.landColor2
+    shaderMaterial.uniforms['color1'].value = new THREE.Color(palette.landColor1)
+    shaderMaterial.uniforms['color2'].value = new THREE.Color(palette.landColor2)
     shaderMaterial.uniformsNeedUpdate = true
-  }, [palette])
+  }, [palette, shaderMaterial])
 
   function handleClick() {
     switchTheme()
@@ -58,7 +86,7 @@ function Landscape(props: JSX.IntrinsicElements['mesh']) {
   </mesh>
 }
 
-const Camera = () => {
+function Camera() {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null!)
   const vec = new THREE.Vector3();
   useFrame((state) => {

@@ -1,14 +1,14 @@
 import * as THREE from 'three'
-import { lightPalette } from './theme'
+import { lightPalette } from '../theme'
 
 
 export const terrainShader: THREE.ShaderMaterialParameters = {
   uniforms: {
     color1: {
-      value: lightPalette.landColor1
+      value: new THREE.Color(lightPalette.landColor1)
     },
     color2: {
-      value: lightPalette.landColor2
+      value: new THREE.Color(lightPalette.landColor2)
     }
 
   },

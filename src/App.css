@@ -6,22 +6,21 @@
 }
 
 .theme-button {
+  all: unset;
   position: absolute;
-  top: 0;
-  right: 0;
+  justify-self: flex-end;
+  align-self: flex-start;
   font-size: 3rem;
   cursor: pointer;
 }
 main {
-  position: relative;
-  margin: 10em;
-  padding: 0;
+  display: grid;
+  padding: 10em;
 
 }
 
 @media (max-width: 800px) {
   main {
-    margin: 5em 2em;
-    padding: 0;
+    padding: 5em 2em;
   }
 }

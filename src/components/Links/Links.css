@@ -1,4 +1,10 @@
 .links-container {
     display: flex; 
-    gap: 8px;
+    gap: 12px;
+}
+
+.link-icon {
+    transition: all 0.3s;
+    width: 32px;
+    height: 32px;
 }

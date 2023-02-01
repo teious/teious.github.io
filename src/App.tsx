@@ -19,11 +19,11 @@ export default function App() {
       </div>
       <main>
         <h1>tales pinto</h1>
-        <h4>fullstack developer</h4>
-        <Links/>
-        <div role="button" className="theme-button" onClick={switchTheme}>
-          {theme === 'dark'? '☀':'☾'}
-        </div>
+        <h4>frontend engineer</h4>
+        <Links />
+        <button className="theme-button" onClick={switchTheme}>
+          {theme === 'dark' ? '☀' : '☾'}
+        </button>
       </main>
     </>
   )

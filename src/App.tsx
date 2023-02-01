@@ -19,10 +19,12 @@ export default function App() {
         <BackgroundScene />
       </div>
       <main>
-        <h1>tales pinto</h1>
+        <h1>tales pinto         </h1>
         <h4>frontend engineer</h4>
+
         <Links />
         <ThemeToggle theme={theme} toggleTheme={switchTheme} />
+
       </main>
     </>
   )

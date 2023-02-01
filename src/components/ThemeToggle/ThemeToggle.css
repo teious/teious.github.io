@@ -1,12 +1,13 @@
+/* todo: use css variables */
 .toggle-container {
     all: unset;
     cursor: pointer;
     width: 64px;
     height: 30px;
-    background-color: white;
     border-radius: 15px;
     position: relative;
     transition: all ease-in-out 0.3s;
+    margin-top: 24px;
 }
 
 .toggle-container::after {

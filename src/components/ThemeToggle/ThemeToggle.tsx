@@ -1,4 +1,5 @@
 
+import { ButtonHTMLAttributes } from 'react';
 import { Theme } from '../../theme';
 import './ThemeToggle.css'
 
@@ -7,9 +8,9 @@ interface ToggleProps {
     toggleTheme: () => void;
 }
 
-export function ThemeToggle({ theme, toggleTheme }: ToggleProps) {
+export function ThemeToggle({ theme, toggleTheme, className, ...props }: ToggleProps & ButtonHTMLAttributes<HTMLButtonElement>) {
 
 
-    return <button className={`toggle-container ${theme}`} onClick={toggleTheme} />
+    return <button {...props} className={`toggle-container ${theme} ${className || ''}`} onClick={toggleTheme} />
 
 }

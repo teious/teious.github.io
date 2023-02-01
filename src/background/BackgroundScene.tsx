@@ -11,7 +11,7 @@ function BackgroundScene() {
     <spotLight position={[100, 1000, 10000]} angle={0.15} penumbra={1} />
     <pointLight position={[-10, -10, -10]} />
     <Camera />
-    <SuspendedParticles/>
+    <SuspendedParticles />
     <Landscape />
   </Canvas>
 }
@@ -26,15 +26,15 @@ function generateTerrain() {
 }
 generateTerrain()
 
-function generateVertices(){
+function generateVertices() {
   const vertices = []
-  for ( let i = 0; i < 5000; i ++ ) {
+  for (let i = 0; i < 5000; i++) {
 
-    const x = THREE.MathUtils.randFloatSpread( 1500 );
-    const y = THREE.MathUtils.randFloatSpread( 1500 );
-    const z = THREE.MathUtils.randFloatSpread( 1500 );
+    const x = THREE.MathUtils.randFloatSpread(1500);
+    const y = THREE.MathUtils.randFloatSpread(1500);
+    const z = THREE.MathUtils.randFloatSpread(1500);
 
-    vertices.push( x, y, z );
+    vertices.push(x, y, z);
 
   }
   return vertices
@@ -46,18 +46,18 @@ function SuspendedParticles() {
 
   const { palette } = useTheme()
 
-  return  <points>
-      <bufferGeometry attributes={{
-        position: new THREE.Float32BufferAttribute(vertices,3)
-      }}/>
-      <pointsMaterial color={palette.landBorderColor}/>
-    </points>
+  return <points>
+    <bufferGeometry attributes={{
+      position: new THREE.Float32BufferAttribute(vertices, 3)
+    }} />
+    <pointsMaterial color={palette.landBorderColor} />
+  </points>
 }
 
 function Landscape(props: JSX.IntrinsicElements['mesh']) {
   const ref = useRef<THREE.Mesh>(null!)
 
-  const { palette, switchTheme } = useTheme()
+  const { palette } = useTheme()
 
   const shaderMaterial = useMemo(() => new THREE.ShaderMaterial(terrainShader), []);
 
@@ -67,9 +67,6 @@ function Landscape(props: JSX.IntrinsicElements['mesh']) {
     shaderMaterial.uniformsNeedUpdate = true
   }, [palette, shaderMaterial])
 
-  function handleClick() {
-    switchTheme()
-  }
   return <mesh
     {...props}
     ref={ref}
@@ -77,7 +74,6 @@ function Landscape(props: JSX.IntrinsicElements['mesh']) {
     position={[0, -25, 0]}
     geometry={terrain}
     material={shaderMaterial}
-    onClick={handleClick}
   >
     <lineSegments>
       <wireframeGeometry args={[terrain]} />

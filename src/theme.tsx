@@ -16,7 +16,7 @@ export const darkPalette = {
     constrastColor: '#FFFFFF'
 }
 
-type Theme = "light" | "dark"
+export type Theme = "light" | "dark"
 type ThemeContextType = ["light" | "dark", Dispatch<SetStateAction<Theme>>];
 
 const ThemeContext = React.createContext<ThemeContextType>(['light', null!])
@@ -26,9 +26,9 @@ export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
     const storedTheme = localStorage.getItem('theme') as Theme | null
     const [theme, setTheme] = useState<Theme>(storedTheme || 'light');
 
-    useEffect(()=>{
+    useEffect(() => {
         localStorage.setItem('theme', theme)
-    },[theme])
+    }, [theme])
 
     return <ThemeContext.Provider value={[theme, setTheme]}>
         {children}

@@ -1,0 +1,59 @@
+.toggle-container {
+    all: unset;
+    cursor: pointer;
+    width: 64px;
+    height: 30px;
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    transition: all ease-in-out 0.3s;
+}
+
+.toggle-container::after {
+    display: block;
+    position: absolute;
+    transition: all 0.3s;
+    top: 4px;
+    content: '';
+    width: 22px;
+    height: 22px;
+    border-radius: 12px;
+    background-color: black;
+    z-index: 1;
+}
+
+.toggle-container.light::before {
+    position: absolute;
+    content: '🌞';
+    right: 4px;
+    top: 4px;
+}
+
+
+.toggle-container.dark::before {
+    position: absolute;
+    content: '🌙';
+    left: 4px;
+    top: 4px;
+}
+
+.toggle-container.dark {
+    background-color: white;
+}
+.toggle-container.dark::after {
+    left: 37px;
+    background-color: #303040;
+}
+
+
+
+.toggle-container.light {
+    background-color: black;
+}
+
+.toggle-container.light::after {
+    left: 4px;
+    background-color:  #faeac8;
+   
+}
+
